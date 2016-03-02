@@ -44,12 +44,16 @@ fi
 
 # OS specific support (must be 'true' or 'false').
 cygwin=false;
+mingw=false;
 darwin=false;
 solaris=false;
 freebsd=false;
 case "$(uname)" in
     CYGWIN*)
         cygwin=true
+        ;;
+    MINGW*)
+        mingw=true
         ;;
     Darwin*)
         darwin=true

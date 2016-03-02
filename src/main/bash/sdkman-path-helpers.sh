@@ -82,7 +82,11 @@ function __sdkman_link_candidate_version {
 
 	# Change the 'current' symlink for the candidate, hence affecting all shells.
 	if [[ -h "${SDKMAN_CANDIDATES_DIR}/${candidate}/current" || -d "${SDKMAN_CANDIDATES_DIR}/${candidate}/current" ]]; then
-		rm -f "${SDKMAN_CANDIDATES_DIR}/${candidate}/current"
+		if [[ $cygwin || $mingw ]]; then
+			rm -rf "${SDKMAN_CANDIDATES_DIR}/${candidate}/current"
+		else
+			unlink "${SDKMAN_CANDIDATES_DIR}/${candidate}/current"
+		fi    
 	fi
 	ln -s "${SDKMAN_CANDIDATES_DIR}/${candidate}/${version}" "${SDKMAN_CANDIDATES_DIR}/${candidate}/current"
 }
